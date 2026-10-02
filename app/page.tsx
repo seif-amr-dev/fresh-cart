@@ -96,7 +96,7 @@ ms-5">
 
 {cat?.map((cat) => {
   return (
-    <Link  key={cat._id}  href={`/subcategories/${cat._id}`} className="hover:scale-105 transition-transform duration-300">
+    <Link  key={cat._id}  href={`/categories/${cat._id}`} className="hover:scale-105 transition-transform duration-300">
     
     
     
