@@ -8,6 +8,7 @@ import { IconHeadset, IconRefresh, IconShieldCheck, IconTruck } from "@tabler/ic
 import Newsletter from "./_components/newletter/Newsletter";
 import { ProductsResponse } from "./subcategories/[id]/page";
 import { Product } from "@/types/productsTypes";
+import Link from "next/link";
 
 
 export default async function Home() {
@@ -95,8 +96,12 @@ ms-5">
 
 {cat?.map((cat) => {
   return (
+    <Link  key={cat._id}  href={`/subcategories/${cat._id}`} className="hover:scale-105 transition-transform duration-300">
+    
+    
+    
     <div 
-      key={cat._id} 
+      
       className="shadow-md py-6 px-4 flex flex-col justify-items-center items-center gap-2 "
     >
       <div className="img ">
@@ -106,6 +111,13 @@ ms-5">
       <p>{cat.name}</p>
       {/* ...rest of your content */}
     </div>
+    
+    
+    
+    
+    
+    
+    </Link>
   );
 })}
 
