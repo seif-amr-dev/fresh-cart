@@ -1,7 +1,7 @@
 "use server"
 
 import { shippingData } from "@/app/checkout/CheckOutForm";
-import { CategoriesResponse, Category } from "@/types/categorytypes";
+import Category  from "@/types/categorytypes";
 import { Product, ProductsResponse } from "@/types/productsTypes";
 import { userdata } from "@/types/userdata";
 import { UseId } from "@/utils/getUserid";
