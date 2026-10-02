@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   
-  basePath: "/FreshCart",
+  basePath: "/fresh-cart",
 
   images: {
     unoptimized: true,
