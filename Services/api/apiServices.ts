@@ -139,7 +139,9 @@ export async function Addtocart(productid: string) {
 
 export async function UpdateCart(productid: string, currentcount: number) {
   const token = await UseToken();
-
+if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
   const res = await fetch(`https://ecommerce.routemisr.com/api/v2/cart/${productid}`, {
     method: "PUT",
     body: JSON.stringify({ count: currentcount + 1 }),
@@ -168,6 +170,9 @@ export async function DecreaseCart(productid: string, currentcount: number) {
 if(currentcount==0){
   return 
 }
+if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
 
   const res = await fetch(`https://ecommerce.routemisr.com/api/v2/cart/${productid}`, {
     method: "PUT",
@@ -193,9 +198,18 @@ if(currentcount==0){
 export async function DeleteProduct(productid: string) {
   const token = await UseToken();
 
+if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
+
+
   const res = await fetch(`https://ecommerce.routemisr.com/api/v2/cart/${productid}`, {
     method: "DELETE",
    
+
+
+
+
     headers: {
       token: token,
       "content-type": "application/json",
@@ -215,6 +229,9 @@ export async function DeleteProduct(productid: string) {
 
 export async function ClearCart(){
 const token= await UseToken();
+if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
 
 
 const res= await fetch("https://ecommerce.routemisr.com/api/v2/cart",{
@@ -242,6 +259,9 @@ export async function CreateOnlineOrder(
   values: shippingData
 ) {
   const token = await UseToken();
+  if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
 
   const res = await fetch(
     `https://ecommerce.routemisr.com/api/v2/orders/checkout-session/${cartid}?url=${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}`,
@@ -272,6 +292,9 @@ export async function CreateCashOrder(
   values: shippingData
 ) {
   const token = await UseToken();
+  if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
 
   const res = await fetch(
     `https://ecommerce.routemisr.com/api/v2/orders/${cartid}`,
@@ -326,6 +349,9 @@ export async function Getuserorders() {
 
 export async function AddtoWishList(productid: string) {
   const token = await UseToken();
+  if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
 
   const res = await fetch(
     "https://ecommerce.routemisr.com/api/v1/wishlist",
@@ -353,6 +379,11 @@ export async function AddtoWishList(productid: string) {
 
 export async function RemoveFromWishlist(productid: string) {
   const token = await UseToken();
+
+if (!token) {
+    throw new Error("Authentication token is missing.");
+  }
+
 
   const res = await fetch(
     `https://ecommerce.routemisr.com/api/v1/wishlist/${productid}`,

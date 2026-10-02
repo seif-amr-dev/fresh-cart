@@ -1,5 +1,6 @@
 "use client"
 
+import { logindata, userdata } from "@/types/userdata";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -33,7 +34,7 @@ const router =useRouter();
 
 
 
-async function Loguser(values) {
+async function Loguser(values:logindata) {
   const result = await signIn("credentials", {
     ...values,
     redirect: false,
