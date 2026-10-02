@@ -18,9 +18,41 @@
     --foreground: #ededed;
   }
 }
-
+/*
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+*/
+
+
+
+
+@theme {
+  --color-primary-50: #eefdf0;
+  --color-primary-100: #d7fadb;
+  --color-primary-200: #b0f4ba;
+  --color-primary-300: #7deb90;
+  --color-primary-400: #45dc63;
+  --color-primary-500: #1fc945;
+  --color-primary-600: #0aad0a; /* main brand green */
+  --color-primary-700: #098f09;
+  --color-primary-800: #0b7311;
+  --color-primary-900: #0a5e10;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out forwards;
 }

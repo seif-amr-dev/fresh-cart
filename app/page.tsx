@@ -1,69 +1,211 @@
 import Image from "next/image";
+import HeroSlider from "./_components/Swiper/page";
+import { GetCategories, GetProducts } from "@/Services/api/apiServices";
+import { log } from "node:console";
+import ProductCard from "./_components/productcard/productCard";
+import Category  from "@/types/categorytypes";
+import { IconHeadset, IconRefresh, IconShieldCheck, IconTruck } from "@tabler/icons-react";
+import Newsletter from "./_components/newletter/Newsletter";
+import { ProductsResponse } from "./subcategories/[id]/page";
+import { Product } from "@/types/productsTypes";
 
-export default function Home() {
+
+export default async function Home() {
+  const cat  = await  GetCategories();
+  const pod = await GetProducts();
+  
+
+
+
+
+
+
+const trustBadges = [
+  {
+    icon: IconTruck,
+    title: "Free Shipping",
+    subtitle: "On orders over 500 EGP",
+  },
+  {
+    icon: IconRefresh,
+    title: "Easy Returns",
+    subtitle: "14-day return policy",
+  },
+  {
+    icon: IconShieldCheck,
+    title: "Secure Payment",
+    subtitle: "100% secure checkout",
+  },
+  {
+    icon: IconHeadset,
+    title: "24/7 Support",
+    subtitle: "Contact us anytime",
+  },
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <>
+    <HeroSlider></HeroSlider>
+
+<section className="mt-10 container  mx-auto  ">
+<h2 className="before:content-[''] before:bg-primary-600 before:w-1 before:h-10
+ before:absolute   
+before:-left-2
+before:
+relative
+font-bold
+text-3xl
+ms-5">
+
+  shop by category
+</h2>
+
+<div className="grid md:grid-cols-6  mt-5   gap-4 ">
+
+{cat?.map((cat) => {
+  return (
+    <div 
+      key={cat._id} 
+      className="shadow-md py-6 px-4 flex flex-col justify-items-center items-center gap-2 "
+    >
+      <div className="img ">
+        <Image  className="rounded-full w-20 h-20 object-contain"  src={cat.image} width={200} height={200} alt={cat.name || "category"} />
+
+      </div>
+      <p>{cat.name}</p>
+      {/* ...rest of your content */}
     </div>
+  );
+})}
+
+
+
+
+</div>
+
+
+
+
+
+</section>
+
+
+
+<section className="mt-10 container mx-auto">
+<h2 className="before:content-[''] before:bg-primary-600 before:w-1 before:h-10
+ before:absolute   
+before:-left-2
+before:
+relative
+font-bold
+text-3xl
+ms-5
+mb-5">
+
+  Products
+</h2>
+
+
+
+<div className="grid xl:grid-cols-4 gap-4  md:grid-cols-2">
+
+{ pod.map((prod)=>{
+
+return <ProductCard product={prod}
+
+ key={prod._id} 
+
+
+></ProductCard> 
+
+})}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+
+<div className="mt-10 container mx-auto mb-4">
+
+
+
+<Newsletter></Newsletter>
+
+
+
+</div>
+
+
+
+
+ <div className="bg-primary-50 mt-5 mb-5">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 py-6 grid grid-cols-2 lg:grid-cols-4 gap-6">
+          {trustBadges.map(({ icon: Icon, title, subtitle }) => (
+            <div key={title} className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-full bg-primary-600 flex items-center justify-center shrink-0">
+                <Icon size={20} className="text-white" />
+              </div>
+              <div>
+                <p className="font-semibold text-gray-900 text-sm">{title}</p>
+                <p className="text-xs text-gray-500">{subtitle}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+    </>
+   
   );
 }
